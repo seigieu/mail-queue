@@ -8,7 +8,7 @@ class Mail{
     protected $config , $dbConfig;
     private $nextQueue;
 
-    protected $queueSQL = "SELECT * FROM `::table-name::` WHERE (is_sent = 0 OR (is_sent = 1 AND try_again = 1 AND has_error = 1)) AND (send_after >= '::now::' || send_after IS NULL) ORDER BY created_at,updated_at LIMIT ::limit::";
+    protected $queueSQL = "SELECT * FROM `::table-name::` WHERE (is_sent = 0 OR (is_sent = 1 AND try_again = 1 AND has_error = 1)) AND (send_after < '::now::' || send_after IS NULL) ORDER BY created_at,updated_at LIMIT ::limit::";
 
     public function __construct(){
         $this->helper = new Helper;
